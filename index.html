@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+
+	<title>Mastermind game</title>
+</head>
+
+<body>
+
+	<div id="wrapper">
+	
+		<div id="welcome-popup">
+			<h2>Play with:</h2>
+			<div>
+				<button id="1v1" class="welcome-button">Friend</button>
+				<button id="1vCPU" class="welcome-button">Computer</button>
+			</div>
+		</div>
+	
+		<div id="board">
+		
+			<div id="numeration">
+				<div>10.</div>
+				<div>9.</div>
+				<div>8.</div>
+				<div>7.</div>
+				<div>6.</div>
+				<div>5.</div>
+				<div>4.</div>
+				<div>3.</div>
+				<div>2.</div>
+				<div>1.</div>
+			</div>
+			
+			<div id="play-area">	
+				<div class="pins-row row-10">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-9">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-8">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-7">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-6">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-5">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-4">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-3">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-2">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>
+				
+				<div class="pins-row row-1 active">
+					<div class="pin"></div><div class="pin"></div><div class="pin"></div><div class="pin"></div>
+				</div>	
+			</div>
+			
+			<div id="punctation">
+			
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+				<div class="round-punctation active">
+					<div class="point"></div><div class="point"></div><div class="point"></div><div class="point"></div>
+				</div>
+				
+			</div>
+			
+			<div id="color-pins">
+				<div class="blue color-pin"></div>
+				<div class="green color-pin"></div>
+				<div class="red color-pin"></div>
+				<div class="yellow color-pin"></div>
+				<div class="purple color-pin"></div>
+				<div class="orange color-pin"></div>
+				<button>Try</button>
+			</div>
+			
+		</div>
+	</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</body>
+
+</html>
