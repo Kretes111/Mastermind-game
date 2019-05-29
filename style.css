@@ -53,6 +53,35 @@ h2 {
 	transform: scale(1.1);
 }
 
+#end-game-popup {
+	position: absolute;
+	background-color: #d0d0d0;
+	width: 80%;
+	height: 25%;
+	z-index: 2;
+/*	top: 20%;*/
+	top: -25%;
+	left: 10%;
+	border-radius: 10px;
+	border: 3px solid #1e6960;
+	font-size: 1.5rem;
+	text-align: center;
+	line-height: 1.7;
+	color: #0f3934;
+/*	display: none;*/
+}
+
+.code {
+	position: absolute;
+	width: 80%;
+	left: 10%;
+	bottom: 15%;
+}
+
+.code div {
+	margin: auto;
+}
+
 #board {
 	background-color: #78b5ae;
 	width: 370px;
