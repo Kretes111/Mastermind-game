@@ -14,6 +14,7 @@
 	border-radius: 15px
 }
 
+
 #welcome-popup {
 	position: absolute;
 	background-color: #d0d0d0;
@@ -33,6 +34,39 @@ h2 {
 	margin-top: 20px;
 	margin-bottom: 30px;
 	color: #4a4a4a;
+}
+
+#two-players-popup {
+	position: absolute;
+	background-color: #d0d0d0;
+	width: 70%;
+	height: 30%;
+	z-index: 2;
+	top: 20%;
+	left: 10%;
+	border-radius: 10px;
+	border: 3px solid #1e6960;
+	text-align: center;
+	line-height: 1.7;
+	display: none;
+}
+
+#two-players-popup button {
+	position: absolute;
+	width: 30%;
+	height: 30px;
+	left: 35%;
+	bottom: 10%;
+	background-color: #78b5ae;
+	font-size: 17px;
+	border-radius: 7px;
+	border: 1px solid #1e6960;
+	color: #4a4a4a;
+	font-weight: 600;
+}
+
+#two-players-popup button:hover {
+	transform: scale(1.1);
 }
 
 .welcome-button {
@@ -57,10 +91,10 @@ h2 {
 	position: absolute;
 	background-color: #d0d0d0;
 	width: 80%;
-	height: 25%;
+	height: 30%;
 	z-index: 2;
-/*	top: 20%;*/
-	top: -25%;
+	top: 20%;
+/*	top: -25%;*/
 	left: 10%;
 	border-radius: 10px;
 	border: 3px solid #1e6960;
@@ -68,14 +102,32 @@ h2 {
 	text-align: center;
 	line-height: 1.7;
 	color: #0f3934;
-/*	display: none;*/
+	display: none;
 }
 
 .code {
 	position: absolute;
 	width: 80%;
 	left: 10%;
-	bottom: 15%;
+	bottom: 35%;
+}
+
+#end-game-popup button {
+	position: absolute;
+	height: 15%;
+	width: 30%;
+	bottom: 12%;
+	left: 35%;
+	background-color: #78b5ae;
+	font-size: 17px;
+	border-radius: 7px;
+	border: 1px solid #1e6960;
+	color: #4a4a4a;
+	font-weight: 600;
+}
+
+#end-game-popup button:hover {
+	transform: scale(1.1);
 }
 
 .code div {
@@ -120,14 +172,15 @@ h2 {
 	height: 30px;
 	background-color: #579089;
 	border-radius: 50%;
-	border: px solid black
-/*		margin: auto;*/
+	margin: auto;
+	border: 2px solid black;
 }
 
 #punctation {
 	display: grid;
 	grid-template-rows: auto;
 }
+
 
 .round-punctation {
 	display: grid;
@@ -150,8 +203,24 @@ h2 {
 }
 
 #color-pins {
+	position: relative;
 	display: grid;
 	align-content: flex-end;
+}
+
+#two-players-score {
+	position: absolute;
+	top: 10px;
+	left: 5px;
+	line-height: 1.5;
+	text-align: center;
+	display: none;
+	background-color: #7dcec3;
+	border-radius: 10px;
+}
+
+#two-players-score span {
+	font-size: 1.4rem;
 }
 
 #color-pins button {
@@ -213,3 +282,12 @@ h2 {
 	background-color: white;
 }
 
+#play-area .active {
+	background-color: #7dcec3;
+	border-radius: 30px;
+	transition: all .5s;
+}
+
+.active .pin:hover {
+	transform: scale(1.2)
+}

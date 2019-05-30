@@ -12,16 +12,16 @@
 <body>
 
 	<div id="wrapper">
-	
+
 		<div id="end-game-popup">
-		<p>Gratulations</p>
-		<p>Code was:</p>
+			<p></p>
 			<div class="code pins-row">
 				<div class="pin"></div>
 				<div class="pin"></div>
 				<div class="pin"></div>
 				<div class="pin"></div>
 			</div>
+			<button>Play again</button>
 		</div>
 
 		<div id="welcome-popup">
@@ -30,6 +30,17 @@
 				<button id="1v1" class="welcome-button">Friend</button>
 				<button id="1vCPU" class="welcome-button">Computer</button>
 			</div>
+		</div>
+
+		<div id="two-players-popup">
+		<h2>Player 1 set the code:</h2>
+			<div class="code pins-row active">
+				<div class="pin"></div>
+				<div class="pin"></div>
+				<div class="pin"></div>
+				<div class="pin"></div>
+			</div>
+			<button>Ok</button>
 		</div>
 
 		<div id="board">
@@ -194,6 +205,19 @@
 			</div>
 
 			<div id="color-pins">
+
+				<div id="two-players-score">
+					<h3>Score</h3>
+					<div class="player-1">
+						<p>Player1</p>
+						<span>0</span>
+					</div>
+					<div class="player-2">
+						<p>Player2</p>
+						<span>0</span>
+					</div>
+				</div>
+
 				<div class="blue color-pin"></div>
 				<div class="green color-pin"></div>
 				<div class="red color-pin"></div>
