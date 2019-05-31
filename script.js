@@ -1,11 +1,30 @@
-const colors = ["blue", "green", "red", "yellow", "purple", "orange"];
-const codeToGuess = [];
-const code = $(".code .pin");
+const colors = ["blue", "green", "pink", "yellow", "purple", "orange"];
+let codeToGuess = [];
 let currentColor = "";
 let rowIndex = 1;
+let code;
+let roundIndex = 1;
+let playerNumber;
+let span1 = document.getElementById("points-1");
+let span2 = document.getElementById("points-2");
+let penalty = 0;
+let currentScore;
+let currentCodeRow;
+
+//check which player
+const whichPlayer = function () {
+	if (roundIndex % 2 == 0) {
+		playerNumber = 2;
+		currentScore = span2;
+	} else {
+		playerNumber = 1;
+		currentScore = span1;
+	}
+}
 
 //draw color code by CPU
 const draw = function () {
+	code = $("#end-game-popup .code .pin");
 	let index = 0;
 	while (codeToGuess.length < 4) {
 		const randomNum = Math.floor(Math.random() * colors.length);
@@ -13,12 +32,40 @@ const draw = function () {
 		code[index].classList.add(codeToGuess[[index]]);
 		index += 1;
 	}
-	console.log(codeToGuess)
+	console.log(codeToGuess);
+	console.log(code);
 };
+
+//set code by player
+const setCode = function () {
+	let currentCodeRow = $("#two-players-popup .active div");
+	let index = 0;
+	code = $("#two-players-popup .code .pin")
+	if (currentCodeRow[0].classList.length == 2 &&
+		currentCodeRow[1].classList.length == 2 &&
+		currentCodeRow[2].classList.length == 2 &&
+		currentCodeRow[3].classList.length == 2) {
+
+		codeToGuess = [];
+		while (codeToGuess.length < 4) {
+			codeToGuess.push(currentCodeRow[index].classList[1]);
+			code[index].classList.add(codeToGuess[[index]]);
+			index += 1;
+		}
+		console.log(codeToGuess);
+		//		console.log(code);
+		$(document).on("click", "#play-area .active div", setColor);
+		$("#two-players-popup").fadeOut();
+	}
+}
 
 //pick color
 const pickColor = function () {
 	currentColor = this.classList[0];
+	$(".color-pin").removeClass("currentColor");
+	this.classList.add("currentColor");
+	//	console.log(currentColor);
+	//	console.log(this.classList)
 }
 
 //set the selected color
@@ -26,6 +73,7 @@ const setColor = function () {
 	$(this).removeClass();
 	$(this).addClass("pin");
 	$(this).addClass(currentColor);
+	//	console.log(this.classList);
 }
 
 //check result
@@ -41,7 +89,7 @@ const checkCode = function () {
 			if (currentRow[i].classList[1] == codeToGuess[i]) {
 				for (let j = 0; j < currentPoints.length; j++) {
 					if (currentPoints[j].classList.length < 2) {
-						currentPoints[j].classList.add("black");
+						currentPoints[j].classList.add("red");
 						currentRow[i].classList.add("checked");
 						code[i].classList.add("checked");
 						break;
@@ -77,15 +125,30 @@ const checkCode = function () {
 		}
 		rowIndex += 1;
 
-		if (currentPoints[0].classList.contains("black") &&
-			currentPoints[1].classList.contains("black") &&
-			currentPoints[2].classList.contains("black") &&
-			currentPoints[3].classList.contains("black")) {
-			$("#end-game-popup p").html(`Gratulations<br>You won in: ${rowIndex -1}. attempt!`);
-			$("#end-game-popup").fadeIn();
+		whichPlayer();
+
+		if (currentPoints[0].classList.contains("red") &&
+			currentPoints[1].classList.contains("red") &&
+			currentPoints[2].classList.contains("red") &&
+			currentPoints[3].classList.contains("red")) {
+			if ($("#two-players-score").is(':hidden')) {
+				$("#end-game-popup p").html(`Gratulations<br>You won in: ${rowIndex -1}. attempt!`);
+				$("#end-game-popup").fadeIn();
+			} else if ($("#two-players-score").is(':visible')) {
+				roundIndex += 1;
+				$(document).off('click', "#play-area .active div");
+				nextRound();
+			}
 		} else if (rowIndex > 10) {
-			$("#end-game-popup p").html(`Game over<br>Code was:`);
-			$("#end-game-popup").fadeIn();
+			if ($("#two-players-score").is(':hidden')) {
+				$("#end-game-popup p").html(`Game over<br>Code was:`);
+				$("#end-game-popup").fadeIn();
+			} else if ($("#two-players-score").is(':visible')) {
+				roundIndex += 1;
+				penalty = 11;
+				$(document).off('click', "#play-area .active div");
+				nextRound();
+			}
 		}
 
 		$(".active").removeClass("active");
@@ -93,8 +156,6 @@ const checkCode = function () {
 		$(".code .pin").removeClass("checked");
 	}
 }
-
-
 
 //<---play with computer--->
 $("#1vCPU").click(function () {
@@ -119,8 +180,57 @@ $("#end-game-popup button").click(function () {
 
 
 //<---play with friend--->
-$("#1v1").click(function() {
+$("#1v1").click(function () {
+
 	$("#welcome-popup").fadeOut();
 	$("#two-players-popup").fadeIn();
 	$("#two-players-score").fadeIn();
+	$(".color-pin").click(pickColor);
+	$(document).on("click", "#two-players-popup .active div", setColor);
+	$("#two-players-popup button").click(setCode);
+	
+
+	$("#color-pins button").click(checkCode);
 })
+
+const nextRound = function () {
+	$("#end-round-popup .pin").removeClass();
+	$("#end-round-popup .code div").addClass("pin");
+
+	$("#end-round-popup .pin")[0].classList.add(codeToGuess[0]);
+	$("#end-round-popup .pin")[1].classList.add(codeToGuess[1]);
+	$("#end-round-popup .pin")[2].classList.add(codeToGuess[2]);
+	$("#end-round-popup .pin")[3].classList.add(codeToGuess[3]);
+
+	if (penalty == 11) {
+		currentScore.textContent = parseInt(currentScore.textContent) + penalty;
+		$("#end-round-popup p").html("Sorry, you missed a chance<br>Code was:");
+		$("#end-round-popup").fadeIn();
+	} else {
+		currentScore.textContent = parseInt(currentScore.textContent) + (rowIndex - 1);
+		$("#end-round-popup p").html(`Gratulations<br>You guessed in: ${rowIndex -1}. attempt!`);
+		$("#end-round-popup").fadeIn();
+	}
+	penalty = 0;
+
+	const newRound = function () {
+		whichPlayer();
+		$("#end-round-popup").fadeOut();
+		rowIndex = 1;
+		$("#play-area .pin").removeClass();
+		$("#play-area .pins-row div").addClass("pin");
+		$(".point").removeClass();
+		$(".round-punctation div").addClass("point");
+		console.log($(".active"));
+		$(".active").removeClass("active");
+		$(`.row-${rowIndex}`).addClass("active");
+		$("#two-players-popup h2").text(`Player ${playerNumber} set the code:`);
+		$("#two-players-popup .pin").removeClass();
+		$("#two-players-popup .code div").addClass("pin");
+		$("#two-players-popup .code").addClass("active");
+		$(document).on("click", "#two-players-popup .active div", setColor);
+		$("#two-players-popup").fadeIn();
+	}
+
+	$("#end-round-popup button").click(newRound);
+}

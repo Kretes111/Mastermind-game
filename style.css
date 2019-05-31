@@ -87,7 +87,7 @@ h2 {
 	transform: scale(1.1);
 }
 
-#end-game-popup {
+#end-game-popup, #end-round-popup {
 	position: absolute;
 	background-color: #d0d0d0;
 	width: 80%;
@@ -112,7 +112,7 @@ h2 {
 	bottom: 35%;
 }
 
-#end-game-popup button {
+#end-game-popup button, #end-round-popup button {
 	position: absolute;
 	height: 15%;
 	width: 30%;
@@ -126,7 +126,7 @@ h2 {
 	font-weight: 600;
 }
 
-#end-game-popup button:hover {
+#end-game-popup button, #end-round-popup button:hover {
 	transform: scale(1.1);
 }
 
@@ -215,7 +215,7 @@ h2 {
 	line-height: 1.5;
 	text-align: center;
 	display: none;
-	background-color: #7dcec3;
+	background-color: #d0d0d0;
 	border-radius: 10px;
 }
 
@@ -258,8 +258,8 @@ h2 {
 	background-color: #0ebc0e;
 }
 
-.red {
-	background-color: #e52525;
+.pink {
+	background-color: #f25aff;
 }
 
 .yellow {
@@ -267,15 +267,15 @@ h2 {
 }
 
 .purple {
-	background-color: #ce1fce;
+	background-color: #6922b1;
 }
 
 .orange {
 	background-color: #ff7600;
 }
 
-.black {
-	background-color: black;
+.red {
+	background-color: red;
 }
 
 .white {
@@ -290,4 +290,8 @@ h2 {
 
 .active .pin:hover {
 	transform: scale(1.2)
+}
+
+.currentColor {
+	transform: scale(1.4);
 }
