@@ -64,6 +64,7 @@ const pickColor = function () {
 	currentColor = this.classList[0];
 	$(".color-pin").removeClass("currentColor");
 	this.classList.add("currentColor");
+	$(".prompt").fadeOut();
 	//	console.log(currentColor);
 	//	console.log(this.classList)
 }
@@ -161,6 +162,7 @@ const checkCode = function () {
 $("#1vCPU").click(function () {
 	$("#welcome-popup").fadeOut();
 	draw();
+	$(".prompt").fadeIn();
 
 	//	pick color
 	$(".color-pin").click(pickColor);
@@ -185,6 +187,7 @@ $("#1v1").click(function () {
 	$("#welcome-popup").fadeOut();
 	$("#two-players-popup").fadeIn();
 	$("#two-players-score").fadeIn();
+	$(".prompt").fadeIn();
 	$(".color-pin").click(pickColor);
 	$(document).on("click", "#two-players-popup .active div", setColor);
 	$("#two-players-popup button").click(setCode);
