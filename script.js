@@ -191,7 +191,7 @@ $("#1v1").click(function () {
 	$(".color-pin").click(pickColor);
 	$(document).on("click", "#two-players-popup .active div", setColor);
 	$("#two-players-popup button").click(setCode);
-	
+
 
 	$("#color-pins button").click(checkCode);
 })
