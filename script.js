@@ -33,7 +33,6 @@ const draw = function () {
 		index += 1;
 	}
 	console.log(codeToGuess);
-	console.log(code);
 };
 
 //set code by player
@@ -53,7 +52,6 @@ const setCode = function () {
 			index += 1;
 		}
 		console.log(codeToGuess);
-		//		console.log(code);
 		$(document).on("click", "#play-area .active div", setColor);
 		$("#two-players-popup").fadeOut();
 	}
@@ -138,7 +136,7 @@ const checkCode = function () {
 			} else if ($("#two-players-score").is(':visible')) {
 				roundIndex += 1;
 				$(document).off('click', "#play-area .active div");
-				nextRound();
+				endRound();
 			}
 		} else if (rowIndex > 10) {
 			if ($("#two-players-score").is(':hidden')) {
@@ -148,7 +146,7 @@ const checkCode = function () {
 				roundIndex += 1;
 				penalty = 11;
 				$(document).off('click', "#play-area .active div");
-				nextRound();
+				endRound();
 			}
 		}
 
@@ -156,6 +154,50 @@ const checkCode = function () {
 		$(`.row-${rowIndex}`).addClass("active");
 		$(".code .pin").removeClass("checked");
 	}
+}
+
+//end round in player vs player variant
+const endRound = function () {
+	$("#end-round-popup .pin").removeClass();
+	$("#end-round-popup .code div").addClass("pin");
+
+	$("#end-round-popup .pin")[0].classList.add(codeToGuess[0]);
+	$("#end-round-popup .pin")[1].classList.add(codeToGuess[1]);
+	$("#end-round-popup .pin")[2].classList.add(codeToGuess[2]);
+	$("#end-round-popup .pin")[3].classList.add(codeToGuess[3]);
+
+	if (penalty == 11) {
+		currentScore.textContent = parseInt(currentScore.textContent) + penalty;
+		$("#end-round-popup p").html("Sorry, you missed a chance<br>Code was:");
+		$("#end-round-popup").fadeIn();
+	} else {
+		currentScore.textContent = parseInt(currentScore.textContent) + (rowIndex - 1);
+		$("#end-round-popup p").html(`Gratulations<br>You guessed in: ${rowIndex -1}. attempt!`);
+		$("#end-round-popup").fadeIn();
+	}
+	penalty = 0;
+
+	$("#end-round-popup button").click(newRound);
+}
+
+//new round in player vs player variant
+const newRound = function () {
+	whichPlayer();
+	$("#end-round-popup").fadeOut();
+	rowIndex = 1;
+	$("#play-area .pin").removeClass();
+	$("#play-area .pins-row div").addClass("pin");
+	$(".point").removeClass();
+	$(".round-punctation div").addClass("point");
+	console.log($(".active"));
+	$(".active").removeClass("active");
+	$(`.row-${rowIndex}`).addClass("active");
+	$("#two-players-popup h2").text(`Player ${playerNumber} set the code:`);
+	$("#two-players-popup .pin").removeClass();
+	$("#two-players-popup .code div").addClass("pin");
+	$("#two-players-popup .code").addClass("active");
+	$(document).on("click", "#two-players-popup .active div", setColor);
+	$("#two-players-popup").fadeIn();
 }
 
 //<---play with computer--->
@@ -180,10 +222,8 @@ $("#end-game-popup button").click(function () {
 })
 
 
-
 //<---play with friend--->
 $("#1v1").click(function () {
-
 	$("#welcome-popup").fadeOut();
 	$("#two-players-popup").fadeIn();
 	$("#two-players-score").fadeIn();
@@ -191,49 +231,5 @@ $("#1v1").click(function () {
 	$(".color-pin").click(pickColor);
 	$(document).on("click", "#two-players-popup .active div", setColor);
 	$("#two-players-popup button").click(setCode);
-
-
 	$("#color-pins button").click(checkCode);
 })
-
-const nextRound = function () {
-	$("#end-round-popup .pin").removeClass();
-	$("#end-round-popup .code div").addClass("pin");
-
-	$("#end-round-popup .pin")[0].classList.add(codeToGuess[0]);
-	$("#end-round-popup .pin")[1].classList.add(codeToGuess[1]);
-	$("#end-round-popup .pin")[2].classList.add(codeToGuess[2]);
-	$("#end-round-popup .pin")[3].classList.add(codeToGuess[3]);
-
-	if (penalty == 11) {
-		currentScore.textContent = parseInt(currentScore.textContent) + penalty;
-		$("#end-round-popup p").html("Sorry, you missed a chance<br>Code was:");
-		$("#end-round-popup").fadeIn();
-	} else {
-		currentScore.textContent = parseInt(currentScore.textContent) + (rowIndex - 1);
-		$("#end-round-popup p").html(`Gratulations<br>You guessed in: ${rowIndex -1}. attempt!`);
-		$("#end-round-popup").fadeIn();
-	}
-	penalty = 0;
-
-	const newRound = function () {
-		whichPlayer();
-		$("#end-round-popup").fadeOut();
-		rowIndex = 1;
-		$("#play-area .pin").removeClass();
-		$("#play-area .pins-row div").addClass("pin");
-		$(".point").removeClass();
-		$(".round-punctation div").addClass("point");
-		console.log($(".active"));
-		$(".active").removeClass("active");
-		$(`.row-${rowIndex}`).addClass("active");
-		$("#two-players-popup h2").text(`Player ${playerNumber} set the code:`);
-		$("#two-players-popup .pin").removeClass();
-		$("#two-players-popup .code div").addClass("pin");
-		$("#two-players-popup .code").addClass("active");
-		$(document).on("click", "#two-players-popup .active div", setColor);
-		$("#two-players-popup").fadeIn();
-	}
-
-	$("#end-round-popup button").click(newRound);
-}
